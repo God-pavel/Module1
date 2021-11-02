@@ -45,12 +45,23 @@ public class TicketDAOImpl implements TicketDAO {
                                final long eventId,
                                final int place,
                                final Ticket.Category category) {
+        long ticketId = random.nextLong();
+
+        while (isTicketIdNotUnique(ticketId)) {
+            ticketId = random.nextLong();
+        }
+
         return TicketImpl.builder()
-                .id(random.nextLong())
+                .id(ticketId)
                 .userId(userId)
                 .eventId(eventId)
                 .place(place)
                 .category(category)
                 .build();
+    }
+
+    private boolean isTicketIdNotUnique(final long ticketId){
+        return getAllTickets().stream()
+                .anyMatch(ticket -> ticket.getId() == ticketId);
     }
 }

@@ -3,6 +3,8 @@ package src.service.impl;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import src.dao.UserDAO;
 import src.model.User;
@@ -12,6 +14,8 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserDAO userDAO;
+
+    private static Logger LOGGER = LoggerFactory.getLogger(TicketServiceImpl.class);
 
     @Override
     public User getUserById(final long userId) {
@@ -37,16 +41,23 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User createUser(final User user) {
+        if (getUserByEmail(user.getEmail()) != null) {
+            LOGGER.warn("Email {} is not unique", user.getEmail());
+            throw new IllegalArgumentException();
+        }
+        LOGGER.info("Creating user with email {}", user.getEmail());
         return userDAO.createUser(user);
     }
 
     @Override
     public User updateUser(final User user) {
+        LOGGER.info("Updating user with id {}", user.getId());
         return userDAO.updateUser(user);
     }
 
     @Override
     public boolean deleteUser(final long userId) {
+        LOGGER.info("Deleting user with id {}", userId);
         return userDAO.deleteUser(userId);
     }
 }

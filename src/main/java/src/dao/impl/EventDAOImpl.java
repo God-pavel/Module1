@@ -1,12 +1,12 @@
 package src.dao.impl;
 
-import java.util.Collection;
-import java.util.Objects;
-import java.util.Random;
-
 import src.dao.EventDAO;
 import src.model.Event;
 import src.storage.Storage;
+
+import java.util.Collection;
+import java.util.Objects;
+import java.util.Random;
 
 public class EventDAOImpl implements EventDAO {
 
@@ -34,7 +34,14 @@ public class EventDAOImpl implements EventDAO {
 
     @Override
     public Event addEvent(final Event event) {
-        event.setId(random.nextLong());
+        long eventId = random.nextLong();
+
+        while (getEventById(eventId) != null) {
+            eventId = random.nextLong();
+        }
+
+        event.setId(eventId);
+
         return storage.getEvents().put(String.valueOf(event.getId()), event);
     }
 

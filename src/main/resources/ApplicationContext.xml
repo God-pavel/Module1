@@ -26,9 +26,11 @@
 
     <bean id="eventService" class="/src/service/impl/EventServiceImpl.java" autowire="byType">
     </bean>
-    <bean id="ticketService" class="src/service/impl/TicketServiceImpl.java" autowire="byType">
-    </bean>
     <bean id="userService" class="src/service/impl/UserServiceImpl.java" autowire="byType">
+    </bean>
+    <bean id="ticketService" class="src/service/impl/TicketServiceImpl.java" autowire="byType"
+          p:eventService-ref="eventService"
+          p:userService-ref="userService">
     </bean>
 
     <bean id="facade" class="src/facade/impl/BookingFacadeImpl.java">

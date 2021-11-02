@@ -1,20 +1,23 @@
 package src.service.impl;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import src.dao.EventDAO;
 import src.model.Event;
 import src.service.EventService;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class EventServiceImpl implements EventService {
 
     @Autowired
     private EventDAO eventDAO;
+
+    private static Logger LOGGER = LoggerFactory.getLogger(EventServiceImpl.class);
 
     @Override
     public Event getEventById(final long eventId) {
@@ -41,16 +44,19 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public Event createEvent(final Event event) {
+        LOGGER.info("Creating event {}", event.getTitle());
         return eventDAO.addEvent(event);
     }
 
     @Override
     public Event updateEvent(final Event event) {
+        LOGGER.info("Updating event with id {}", event.getId());
         return eventDAO.addEvent(event);
     }
 
     @Override
     public boolean deleteEvent(final long eventId) {
+        LOGGER.info("Deleting event with id {}", eventId);
         return eventDAO.deleteEvent(eventId);
     }
 

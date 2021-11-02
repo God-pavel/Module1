@@ -33,7 +33,15 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public User createUser(final User user) {
-        user.setId(random.nextLong());
+
+        long userId = random.nextLong();
+
+        while (getUserById(userId) != null) {
+            userId = random.nextLong();
+        }
+
+        user.setId(userId);
+
         return storage.getUsers().put(String.valueOf(user.getId()), user);
     }
 
