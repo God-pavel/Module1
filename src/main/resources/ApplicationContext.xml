@@ -7,35 +7,36 @@
 
     <bean id="random" class="java.util.Random"/>
     
-    <bean id="storage" class="src/storage/Storage.java"
-          p:dataFilePath="${storage.dataFilePath}">
+    <bean id="storage" class="study.storage.Storage">
     </bean>
 
-    <bean id="eventDAO" class="src/dao/impl/EventDAOImpl.java"
+    <bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor"/>
+
+    <bean id="eventDAO" class="study.dao.impl.EventDAOImpl"
           p:storage-ref="storage"
           p:random-ref="random">
     </bean>
-    <bean id="ticketDAO" class="src/dao/impl/TicketDAOImpl.java"
+    <bean id="ticketDAO" class="study.dao.impl.TicketDAOImpl"
           p:storage-ref="storage"
           p:random-ref="random">
     </bean>
-    <bean id="userDAO" class="src/dao/impl/UserDAOImpl.java"
+    <bean id="userDAO" class="study.dao.impl.UserDAOImpl"
           p:storage-ref="storage"
           p:random-ref="random">
     </bean>
 
-    <bean id="eventService" class="/src/service/impl/EventServiceImpl.java" autowire="byType">
+    <bean id="eventService" class="study.service.impl.EventServiceImpl" autowire="byType">
     </bean>
-    <bean id="userService" class="src/service/impl/UserServiceImpl.java" autowire="byType">
+    <bean id="userService" class="study.service.impl.UserServiceImpl" autowire="byType">
     </bean>
-    <bean id="ticketService" class="src/service/impl/TicketServiceImpl.java" autowire="byType"
+    <bean id="ticketService" class="study.service.impl.TicketServiceImpl" autowire="byType"
           p:eventService-ref="eventService"
           p:userService-ref="userService">
     </bean>
 
-    <bean id="facade" class="src/facade/impl/BookingFacadeImpl.java">
-        <constructor-arg index="0" value="eventService"/>
-        <constructor-arg index="1" value="ticketService"/>
-        <constructor-arg index="2" value="userService"/>
+    <bean id="facade" class="study.facade.impl.BookingFacadeImpl">
+        <constructor-arg index="0" ref="eventService"/>
+        <constructor-arg index="1" ref="ticketService"/>
+        <constructor-arg index="2" ref="userService"/>
     </bean>
 </beans>
