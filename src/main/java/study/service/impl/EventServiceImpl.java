@@ -2,7 +2,6 @@ package study.service.impl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import study.dao.EventDAO;
 import study.model.Event;
 import study.service.EventService;
@@ -14,7 +13,6 @@ import java.util.stream.Collectors;
 
 public class EventServiceImpl implements EventService {
 
-    @Autowired
     private EventDAO eventDAO;
 
     private static Logger LOGGER = LoggerFactory.getLogger(EventServiceImpl.class);
@@ -58,6 +56,10 @@ public class EventServiceImpl implements EventService {
     public boolean deleteEvent(final long eventId) {
         LOGGER.info("Deleting event with id {}", eventId);
         return eventDAO.deleteEvent(eventId);
+    }
+
+    public void setEventDAO(final EventDAO eventDAO) {
+        this.eventDAO = eventDAO;
     }
 
     private boolean isSameDay(final Date date1, final Date date2) {

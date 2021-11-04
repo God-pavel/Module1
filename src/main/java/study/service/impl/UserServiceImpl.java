@@ -1,18 +1,16 @@
 package study.service.impl;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import study.dao.UserDAO;
 import study.model.User;
 import study.service.UserService;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class UserServiceImpl implements UserService {
 
-    @Autowired
     private UserDAO userDAO;
 
     private static Logger LOGGER = LoggerFactory.getLogger(TicketServiceImpl.class);
@@ -59,5 +57,9 @@ public class UserServiceImpl implements UserService {
     public boolean deleteUser(final long userId) {
         LOGGER.info("Deleting user with id {}", userId);
         return userDAO.deleteUser(userId);
+    }
+
+    public void setUserDAO(final UserDAO userDAO) {
+        this.userDAO = userDAO;
     }
 }

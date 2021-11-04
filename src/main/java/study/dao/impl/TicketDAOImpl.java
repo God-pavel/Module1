@@ -1,13 +1,13 @@
 package study.dao.impl;
 
-import java.util.Collection;
-import java.util.Objects;
-import java.util.Random;
-
 import study.dao.TicketDAO;
 import study.model.Ticket;
 import study.model.impl.TicketImpl;
 import study.storage.Storage;
+
+import java.util.Collection;
+import java.util.Objects;
+import java.util.Random;
 
 public class TicketDAOImpl implements TicketDAO {
 
@@ -51,6 +51,18 @@ public class TicketDAOImpl implements TicketDAO {
             ticketId = random.nextLong();
         }
 
+        final Ticket ticket = buildTicket(userId, eventId, place, category, ticketId);
+
+        storage.getTickets().put(String.valueOf(ticketId), ticket);
+
+        return ticket;
+    }
+
+    private TicketImpl buildTicket(final long userId,
+                                   final long eventId,
+                                   final int place,
+                                   final Ticket.Category category,
+                                   final long ticketId) {
         return TicketImpl.builder()
                 .id(ticketId)
                 .userId(userId)
@@ -60,7 +72,7 @@ public class TicketDAOImpl implements TicketDAO {
                 .build();
     }
 
-    private boolean isTicketIdNotUnique(final long ticketId){
+    private boolean isTicketIdNotUnique(final long ticketId) {
         return getAllTickets().stream()
                 .anyMatch(ticket -> ticket.getId() == ticketId);
     }

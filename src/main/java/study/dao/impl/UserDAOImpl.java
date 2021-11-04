@@ -42,7 +42,9 @@ public class UserDAOImpl implements UserDAO {
 
         user.setId(userId);
 
-        return storage.getUsers().put(String.valueOf(user.getId()), user);
+        storage.getUsers().put(String.valueOf(user.getId()), user);
+
+        return user;
     }
 
     @Override

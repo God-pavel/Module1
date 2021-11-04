@@ -11,6 +11,11 @@ public class UserImpl implements User {
     public UserImpl() {
     }
 
+    public UserImpl(final String name, final String email) {
+        this.name = name;
+        this.email = email;
+    }
+
     @Override
     public long getId() {
         return id;

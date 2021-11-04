@@ -2,9 +2,6 @@ package study.storage;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import study.model.Event;
 import study.model.Ticket;
 import study.model.User;
@@ -15,6 +12,7 @@ import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -59,13 +57,10 @@ public class Storage {
 
         users = userList.stream().collect(Collectors.toMap(user -> String.valueOf(user.getId()), Function.identity()));
         events = eventList.stream().collect(Collectors.toMap(event -> String.valueOf(event.getId()), Function.identity()));
-
-        users.entrySet().forEach(System.out::println);
-        events.entrySet().forEach(System.out::println);
+        tickets = new HashMap<>();
     }
 
     private String getJsonString(final String filePath) throws IOException {
-        System.out.println(filePath);
         return new String(Files.readAllBytes(Paths.get(filePath)));
     }
 

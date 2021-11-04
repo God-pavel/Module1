@@ -2,7 +2,6 @@ package study.model.impl;
 
 import java.util.Date;
 
-
 public class EventImpl implements study.model.Event {
 
     private long id;
@@ -10,6 +9,11 @@ public class EventImpl implements study.model.Event {
     private Date date;
 
     public EventImpl() {
+    }
+
+    public EventImpl(final String title, final Date date) {
+        this.title = title;
+        this.date = date;
     }
 
     @Override

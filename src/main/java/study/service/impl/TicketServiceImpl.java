@@ -1,12 +1,7 @@
 package study.service.impl;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import study.dao.TicketDAO;
 import study.model.Event;
 import study.model.Ticket;
@@ -14,11 +9,13 @@ import study.model.User;
 import study.service.EventService;
 import study.service.TicketService;
 import study.service.UserService;
-import study.storage.Storage;
+
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class TicketServiceImpl implements TicketService {
 
-    @Autowired
     private TicketDAO ticketDAO;
     private EventService eventService;
     private UserService userService;
@@ -70,6 +67,10 @@ public class TicketServiceImpl implements TicketService {
     public boolean cancelTicket(final long ticketId) {
         LOGGER.warn("Canceling ticket with id {}", ticketId);
         return ticketDAO.deleteTicket(ticketId);
+    }
+
+    public void setTicketDAO(final TicketDAO ticketDAO) {
+        this.ticketDAO = ticketDAO;
     }
 
     private boolean isPlaceBooked(int place) {

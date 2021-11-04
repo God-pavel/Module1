@@ -41,8 +41,9 @@ public class EventDAOImpl implements EventDAO {
         }
 
         event.setId(eventId);
+        storage.getEvents().put(String.valueOf(event.getId()), event);
 
-        return storage.getEvents().put(String.valueOf(event.getId()), event);
+        return event;
     }
 
     @Override
