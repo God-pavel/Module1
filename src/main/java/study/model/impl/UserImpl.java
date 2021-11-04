@@ -1,14 +1,15 @@
 package study.model.impl;
 
-import lombok.Builder;
 import study.model.User;
 
-@Builder
 public class UserImpl implements User {
-    
+
     private long id;
     private String name;
     private String email;
+
+    public UserImpl() {
+    }
 
     @Override
     public long getId() {
@@ -38,5 +39,14 @@ public class UserImpl implements User {
     @Override
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "UserImpl{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 }

@@ -1,15 +1,16 @@
 package study.model.impl;
 
-import lombok.Builder;
-
 import java.util.Date;
 
-@Builder
+
 public class EventImpl implements study.model.Event {
-    
+
     private long id;
     private String title;
     private Date date;
+
+    public EventImpl() {
+    }
 
     @Override
     public long getId() {
@@ -39,5 +40,14 @@ public class EventImpl implements study.model.Event {
     @Override
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        return "EventImpl{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", date=" + date +
+                '}';
     }
 }
