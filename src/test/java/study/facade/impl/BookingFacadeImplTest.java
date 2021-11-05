@@ -1,10 +1,10 @@
 package study.facade.impl;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import study.model.Event;
 import study.model.Ticket;
 import study.model.User;
@@ -17,16 +17,12 @@ import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration("/ApplicationContext.xml")
 class BookingFacadeImplTest {
 
-    @InjectMocks
-    private static BookingFacadeImpl bookingFacade;
-
-    @BeforeAll
-    static void init() {
-        final ApplicationContext applicationContext = new ClassPathXmlApplicationContext("ApplicationContext.xml");
-        bookingFacade = applicationContext.getBean("facade", BookingFacadeImpl.class);
-    }
+    @Autowired
+    private BookingFacadeImpl bookingFacade;
 
     @Test
     void realLifeScenario() {

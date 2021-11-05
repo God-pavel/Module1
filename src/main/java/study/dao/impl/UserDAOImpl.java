@@ -1,12 +1,12 @@
 package study.dao.impl;
 
-import java.util.Collection;
-import java.util.Objects;
-import java.util.Random;
-
 import study.dao.UserDAO;
 import study.model.User;
 import study.storage.Storage;
+
+import java.util.Collection;
+import java.util.Objects;
+import java.util.Random;
 
 public class UserDAOImpl implements UserDAO {
 

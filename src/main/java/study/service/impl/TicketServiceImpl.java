@@ -39,7 +39,7 @@ public class TicketServiceImpl implements TicketService {
             LOGGER.warn("Place {} already booked", place);
             throw new IllegalStateException();
         }
-        LOGGER.warn("Booking ticket for {}", userId);
+        LOGGER.info("Booking ticket for {}", userId);
         return ticketDAO.createTicket(userId, eventId, place, category);
     }
 
@@ -65,7 +65,7 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public boolean cancelTicket(final long ticketId) {
-        LOGGER.warn("Canceling ticket with id {}", ticketId);
+        LOGGER.info("Canceling ticket with id {}", ticketId);
         return ticketDAO.deleteTicket(ticketId);
     }
 

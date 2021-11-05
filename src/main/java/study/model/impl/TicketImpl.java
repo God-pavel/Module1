@@ -5,13 +5,13 @@ import study.model.Ticket;
 
 @Builder
 public class TicketImpl implements Ticket {
-    
+
     private long id;
     private long userId;
     private long eventId;
     private Ticket.Category category;
     private int place;
-    
+
     @Override
     public long getId() {
         return id;

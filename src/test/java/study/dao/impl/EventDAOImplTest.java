@@ -1,6 +1,5 @@
 package study.dao.impl;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -10,7 +9,6 @@ import study.model.Event;
 import study.storage.Storage;
 
 import java.util.Map;
-import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
@@ -19,18 +17,12 @@ import static org.mockito.Mockito.when;
 class EventDAOImplTest {
 
     @Mock
-    private static Storage storage;
+    private Storage storage;
     @Mock
-    private static Event event;
+    private Event event;
 
     @InjectMocks
-    private static EventDAOImpl eventDAO;
-
-    @BeforeAll
-    static void init() {
-        eventDAO = new EventDAOImpl();
-        eventDAO.setRandom(new Random());
-    }
+    private EventDAOImpl eventDAO;
 
     @Test
     void getAll_shouldReturnEvent_whenStorageReturnEvent() {

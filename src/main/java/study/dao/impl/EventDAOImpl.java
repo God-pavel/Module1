@@ -21,7 +21,6 @@ public class EventDAOImpl implements EventDAO {
         this.random = random;
     }
 
-
     @Override
     public Collection<Event> getAll() {
         return storage.getEvents().values();
